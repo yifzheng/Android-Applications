@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <!--
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Hello World"
+            android:textColor="#1166FF"
+            android:textSize="40sp"
+            android:textStyle="bold|italic"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtWelcome"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#007778"
+            android:onClick="onHelloBtnClick"
+            android:text="Say Hello" />-->
+    <!--<EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:hint="Name"
+        android:textColor="@color/design_default_color_primary"
+        android:textStyle="italic|bold" />
+
+    <Button
+        android:id="@+id/btnHello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextName"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:text="Say Hello" />
+
+    <TextView
+        android:id="@+id/txtHello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnHello"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Hello"
+        android:textSize="20dp"
+        android:textStyle="bold" />-->
+
+    <RelativeLayout
+        android:id="@+id/movieRelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp">
+
+        <CheckBox
+            android:id="@+id/checkboxHP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Harry Potter" />
+
+        <CheckBox
+            android:id="@+id/checkboxMatrix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/checkboxHP"
+            android:checked="false"
+            android:text="The Matrix" />
+
+        <CheckBox
+            android:id="@+id/checkboxAvengers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/checkboxMatrix"
+            android:checked="false"
+            android:text="The Avengers" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
