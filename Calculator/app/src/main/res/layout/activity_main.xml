@@ -20,7 +20,7 @@
         android:textAlignment="textEnd"
         android:textColor="@color/white"
         android:textSize="70sp"
-        android:maxLength="9"/>
+        android:maxLength="8"/>
 
     <LinearLayout
         android:id="@+id/linearLayout1"
