@@ -12,23 +12,47 @@
         android:id="@+id/edit_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title"
+        android:layout_margin="10dp"
+        android:hint="@string/title"
         android:inputType="text"
-        android:layout_margin="10dp"/>
+        android:minHeight="48dp"
+        tools:ignore="VisualLintTextFieldSize"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/edit_description_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"
+        android:layout_margin="10dp"
+        android:hint="@string/description"
         android:inputType="text"
-        android:layout_margin="10dp"/>
+        android:minHeight="48dp"
+        tools:ignore="VisualLintTextFieldSize"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:layout_margin="10dp"/>
+        android:text="@string/save"
+        android:layout_margin="10dp"
+        tools:ignore="VisualLintButtonSize" />
+
+    <Button
+        android:id="@+id/load_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/load"
+        android:layout_margin="10dp"
+        tools:ignore="VisualLintButtonSize" />
+
+    <TextView
+        android:id="@+id/textview_content_load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="32sp"
+        android:textColor="@color/black"/>
+
 
 </LinearLayout>
