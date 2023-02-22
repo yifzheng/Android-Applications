@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // onClick method for button
+   /* // onClick method for button
     public void onRegistrationBtnClick(View view) {
         // access the text view created in the xml
         TextView firstName = findViewById(R.id.textFirstName); // 'R' = Resources; accessing text view
@@ -29,5 +29,5 @@ public class MainActivity extends AppCompatActivity {
         firstName.setText(firstName.getText() + ": " + editFirstName.getText().toString()); // changed text of text view // get text and transform into string
         lastName.setText(lastName.getText() + ": " + editLastName.getText().toString()); // changed text of text view // get text and transform into string
         email.setText(email.getText() + ": " + editEmail.getText().toString()); // changed text of text view // get text and transform into string
-    }
+    }*/
 }
