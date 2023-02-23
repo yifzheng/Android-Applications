@@ -4,4 +4,8 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="load">Load</string>
+    <string name="update">Update</string>
+    <string name="deleteTitle">Delete Title</string>
+    <string name="deleteDesc">Delete Description</string>
+    <string name="deleteNote">Delete Note</string>
 </resources>
