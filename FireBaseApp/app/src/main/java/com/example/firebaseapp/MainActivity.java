@@ -65,10 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 String title = editTextTitle.getText().toString();
                 String description = editTextDescription.getText().toString();
 
-                Map<String, Object> note = new HashMap<>();
-                note.put(KEY_TITLE, title);
-                note.put(KEY_DESCRIPTION, description);
-
+                Note note = new Note(title, description);
 
                 //<---For general document ID ------->
                 /*notebookRef.add(note).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -99,11 +96,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            // String title = documentSnapshot.getString(KEY_TITLE);
-                            // String description = documentSnapshot.getString(KEY_DESCRIPTION);
-                            Map<String, Object> note = documentSnapshot.getData();
-                            String title = note.get(KEY_TITLE).toString();
-                            String description = note.get(KEY_DESCRIPTION).toString();
+                            Note note = documentSnapshot.toObject(Note.class);
+                            String title = note.getTitle();
+                            String description = note.getDescription();
                             loadContentView.setText("Title: " + title + "\n" + "Description: " + description);
                         } else {
                             Toast.makeText(MainActivity.this, "Document does not exist!", Toast.LENGTH_SHORT).show();
@@ -125,12 +120,9 @@ public class MainActivity extends AppCompatActivity {
                 String description = editTextDescription.getText().toString();
                 String title = editTextTitle.getText().toString();
                 Map<String, Object> note = new HashMap<>();
-                if (!description.equals(""))
-                {
+                if (!description.equals("")) {
                     note.put(KEY_DESCRIPTION, description);
-                }
-                else if (!title.equals(""))
-                {
+                } else if (!title.equals("")) {
                     note.put(KEY_TITLE, title);
                 }
                 noteRef.update(note);
@@ -161,32 +153,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         // this is used to automatically update loadContentView content once some data in the database gets updated
         noteRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null){
+                if (error != null) {
                     Toast.makeText(MainActivity.this, "Error while loading!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, error.toString());
                     return;
                 }
                 if (value.exists()) {
-                    String title = value.getString(KEY_TITLE);
-                    String description = value.getString(KEY_DESCRIPTION);
+                    Note note = value.toObject(Note.class);
+                    String title = note.getTitle();
+                    String description = note.getDescription();
                     loadContentView.setText("Title: " + title + "\n" + "Description: " + description);
-                }
-                else
-                {
+                } else {
                     loadContentView.setText("");
                 }
             }
         });
     }
 
-    public void clearFields()
-    {
+    public void clearFields() {
         editTextTitle.setText("");
         editTextDescription.setText("");
     }
