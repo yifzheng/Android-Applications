@@ -3,7 +3,7 @@
     <string name="save">Save</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
-    <string name="load">Load</string>
+    <string name="load">Load Notes</string>
     <string name="update">Update</string>
     <string name="deleteTitle">Delete Title</string>
     <string name="deleteDesc">Delete Description</string>

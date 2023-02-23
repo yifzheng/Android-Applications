@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="@string/title"
+        android:importantForAutofill="no"
         android:inputType="text"
         android:minHeight="48dp"
-        tools:ignore="VisualLintTextFieldSize"
-        android:importantForAutofill="no" />
+        tools:ignore="VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/edit_description_view"
@@ -25,68 +25,32 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="@string/description"
+        android:importantForAutofill="no"
         android:inputType="text"
         android:minHeight="48dp"
-        tools:ignore="VisualLintTextFieldSize"
-        android:importantForAutofill="no" />
+        tools:ignore="VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/save"
         tools:ignore="VisualLintButtonSize" />
 
-    <Button
+    <!--<Button
         android:id="@+id/load_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:text="@string/load"
-        android:layout_marginHorizontal="10dp"
-        tools:ignore="VisualLintButtonSize" />
+        tools:ignore="VisualLintButtonSize" />-->
 
-    <Button
-        android:id="@+id/update_btn"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/note_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/update"
-        android:layout_marginHorizontal="10dp"
-        tools:ignore="VisualLintButtonSize" />
-
-    <Button
-        android:id="@+id/delete_title_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/deleteTitle"
-        android:layout_marginHorizontal="10dp"
-        tools:ignore="VisualLintButtonSize" />
-
-    <Button
-        android:id="@+id/delete_desc_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/deleteDesc"
-        android:layout_marginHorizontal="10dp"
-        tools:ignore="VisualLintButtonSize" />
-
-    <Button
-        android:id="@+id/delete_note_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/deleteNote"
-        android:layout_marginHorizontal="10dp"
-        tools:ignore="VisualLintButtonSize" />
-
-    <TextView
-        android:id="@+id/textview_content_load"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>
