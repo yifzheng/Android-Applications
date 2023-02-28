@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FireBaseApp</string>
     <string name="save">Save</string>
+    <string name="add">Add Note</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="load">Load Notes</string>

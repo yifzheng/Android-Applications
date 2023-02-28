@@ -3,6 +3,7 @@ package com.example.firebaseapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -118,6 +119,25 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });*/
+
+        // slide to delete item
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                Note note = noteList.get(position);
+
+                // delete form list and database
+                notebookRef.document(note.getId()).delete();
+                noteList.remove(position);
+                noteAdapter.notifyItemRemoved(position);
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -129,11 +149,12 @@ public class MainActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
                     Log.d(TAG, error.toString());
-                    return;
                 } else {
                     noteList.clear();
                     for (QueryDocumentSnapshot documentSnapshot : value) {
                         Note note = documentSnapshot.toObject(Note.class); // convert retrieved data into a note object
+                        note.setId(documentSnapshot.getId());
+                        Log.d(TAG, note.getId());
                         noteList.add(note); // add the note object into the array list
                     }
                     noteAdapter.notifyDataSetChanged();
