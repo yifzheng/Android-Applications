@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,6 +23,8 @@ import java.util.Objects;
 public class CreateNote extends AppCompatActivity {
     private static final String TAG = "CREATE_NOTE_ACTIVITY";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
+    private FirebaseUser currentUser;
     private final CollectionReference notebookRef = db.collection("Notebook"); // reference to the Notebook collection
     private EditText title, description;
     private Button saveBtn;
@@ -31,6 +35,7 @@ public class CreateNote extends AppCompatActivity {
         setContentView(R.layout.activity_create_note);
         Objects.requireNonNull(getSupportActionBar()).hide(); // hides the bar that tells app name
 
+        currentUser = myAuth.getCurrentUser();
         title = (EditText) findViewById(R.id.EDIT_TEXT_TITLE);
         description = (EditText) findViewById(R.id.EDIT_TEXT_DESCRIPTION);
         saveBtn = (Button) findViewById(R.id.SAVE_NOTE_BTN);
@@ -49,6 +54,7 @@ public class CreateNote extends AppCompatActivity {
         String editTextDesc = description.getText().toString();
 
         Note note = new Note(editTextTitle, editTextDesc);
+        note.setUserUID(currentUser.getUid());
 
         notebookRef.add(note).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override

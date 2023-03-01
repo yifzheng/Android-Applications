@@ -2,13 +2,21 @@ package com.example.firebaseapp;
 
 public class Note {
 
-    private String id, title, description;
+    private String id, title, description, userUID;
 
     public Note(){}
     public Note(String title, String description)
     {
         this.title = title;
         this.description = description;
+    }
+
+    public String getUserUID() {
+        return userUID;
+    }
+
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
     }
 
     public String getId() {

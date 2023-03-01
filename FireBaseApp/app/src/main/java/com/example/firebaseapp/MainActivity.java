@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
     private static final String KEY_TITLE = "title", KEY_DESCRIPTION = "description";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
+    private FirebaseUser currentUser;
     private final CollectionReference notebookRef = db.collection("Notebook"); // reference to the Notebook collection
     private TextView loadContentView;
     private RecyclerView recyclerView;
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         Objects.requireNonNull(getSupportActionBar()).hide(); // hides the bar that tells app name
 
         Button addNoteButton = (Button) findViewById(R.id.add_note_btn);
+        Button signoutBtn = findViewById(R.id.sign_out_btn);
 
         recyclerView = findViewById(R.id.note_list);
         recyclerView.setHasFixedSize(true);
@@ -62,13 +67,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
             // go to new activity
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Clicking Add Note Button", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, CreateNote.class));
             }
         });
 
+        signoutBtn.setOnClickListener(view -> {
+            myAuth.signOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        });
+
         // slide to delete item
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -91,7 +100,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     protected void onStart() {
         super.onStart();
         // this is used to automatically update loadContentView content once some data in the database gets updated
-        notebookRef.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+        currentUser = myAuth.getCurrentUser();
+        if (currentUser == null)
+        {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }
+        notebookRef.whereEqualTo("userUID", currentUser.getUid()).addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
