@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
         intent.putExtra(KEY_TITLE, noteList.get(position).getTitle());
         intent.putExtra(KEY_DESCRIPTION, noteList.get(position).getDescription());
-
+        intent.putExtra("NOTE_ID", noteList.get(position).getId());
         startActivity(intent);
     }
 }
