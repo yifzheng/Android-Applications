@@ -35,7 +35,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity implements RecyclerViewInterface{
     private static final String TAG = "MainActivity";
 
-    private static final String KEY_TITLE = "title", KEY_DESCRIPTION = "description";
+    private static final String KEY_TITLE = "title", KEY_DESCRIPTION = "description", KEY_NOTEID = "noteID";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
     private FirebaseUser currentUser;
@@ -105,31 +105,32 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
-        notebookRef.whereEqualTo("userUID", currentUser.getUid()).addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Log.d(TAG, error.toString());
-                } else {
-                    noteList.clear();
-                    for (QueryDocumentSnapshot documentSnapshot : value) {
-                        Note note = documentSnapshot.toObject(Note.class); // convert retrieved data into a note object
-                        note.setId(documentSnapshot.getId());
-                        noteList.add(note); // add the note object into the array list
+        else
+        {
+            notebookRef.whereEqualTo("userUID", currentUser.getUid()).addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if (error != null) {
+                        Log.d(TAG, error.toString());
+                    } else {
+                        noteList.clear();
+                        for (QueryDocumentSnapshot documentSnapshot : value) {
+                            Note note = documentSnapshot.toObject(Note.class); // convert retrieved data into a note object
+                            note.setId(documentSnapshot.getId());
+                            noteList.add(note); // add the note object into the array list
+                        }
+                        noteAdapter.notifyDataSetChanged();
                     }
-                    noteAdapter.notifyDataSetChanged();
                 }
-            }
-        });
+            });
+        }
+
     }
 
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(MainActivity.this, NoteDescription.class);
-
-        intent.putExtra(KEY_TITLE, noteList.get(position).getTitle());
-        intent.putExtra(KEY_DESCRIPTION, noteList.get(position).getDescription());
-        intent.putExtra("NOTE_ID", noteList.get(position).getId());
+        intent.putExtra(KEY_NOTEID, noteList.get(position).getId());
         startActivity(intent);
     }
 }
