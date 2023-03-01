@@ -8,49 +8,19 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <!--<EditText
-        android:id="@+id/edit_title_view"
+    <Button
+        android:id="@+id/add_note_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="@string/title"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        tools:ignore="VisualLintTextFieldSize" />
-
-    <EditText
-        android:id="@+id/edit_description_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="@string/description"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        tools:ignore="VisualLintTextFieldSize" />-->
-
-    <!--<Button
-        android:id="@+id/load_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_marginHorizontal="10dp"
-        android:text="@string/load"
-        tools:ignore="VisualLintButtonSize" />-->
+        android:text="@string/add"
+        tools:ignore="VisualLintButtonSize" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/note_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
-
-    <Button
-        android:id="@+id/save_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/add"
-        tools:ignore="VisualLintButtonSize"
-        android:layout_gravity="bottom"/>
 
 </LinearLayout>
