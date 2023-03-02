@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,32 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="28sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
 
     <TextView
         android:id="@+id/description_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_textView"
-        app:layout_constraintVertical_bias="0.3"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_marginHorizontal="40dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"/>
 
     <Button
         android:id="@+id/UPDATE_BUTTON"
@@ -44,11 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:text="Edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        android:layout_alignBottom="@id/DELETE_BUTTON"
+        android:layout_marginBottom="40dp"/>
 
     <Button
         android:id="@+id/DELETE_BUTTON"
@@ -56,9 +45,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UPDATE_BUTTON" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignBottom="@id/bottomNavigationView"
+        android:layout_marginBottom="80dp"
+         />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
+</RelativeLayout>

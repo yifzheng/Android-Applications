@@ -1,7 +1,10 @@
 package com.example.firebaseapp;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -20,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
-public class CreateNote extends AppCompatActivity {
+public class CreateNote extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
     private static final String TAG = "CREATE_NOTE_ACTIVITY";
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth myAuth = FirebaseAuth.getInstance();
@@ -28,7 +32,9 @@ public class CreateNote extends AppCompatActivity {
     private final CollectionReference notebookRef = db.collection("Notebook"); // reference to the Notebook collection
     private EditText title, description;
     private Button saveBtn;
+    private BottomNavigationView bottomNavigationView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,11 @@ public class CreateNote extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide(); // hides the bar that tells app name
 
         currentUser = myAuth.getCurrentUser();
+        // <--------------Bottom Navigation View---------------------->
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.addNote);
+
         title = (EditText) findViewById(R.id.EDIT_TEXT_TITLE);
         description = (EditText) findViewById(R.id.EDIT_TEXT_DESCRIPTION);
         saveBtn = (Button) findViewById(R.id.SAVE_NOTE_BTN);
@@ -48,8 +59,7 @@ public class CreateNote extends AppCompatActivity {
         });
     }
 
-    public void addNoteToDataBase()
-    {
+    public void addNoteToDataBase() {
         String editTextTitle = title.getText().toString();
         String editTextDesc = description.getText().toString();
 
@@ -68,5 +78,21 @@ public class CreateNote extends AppCompatActivity {
                 Log.d(TAG, e.toString());
             }
         });
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                myAuth.signOut();
+                startActivity(new Intent(CreateNote.this, LoginActivity.class));
+                return true;
+            case R.id.home:
+                startActivity(new Intent(CreateNote.this, MainActivity.class));
+                return true;
+            case R.id.addNote:
+                return true;
+        }
+        return false;
     }
 }

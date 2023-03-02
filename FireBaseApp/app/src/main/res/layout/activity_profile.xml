@@ -4,26 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Profile">
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/sign_out_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/note_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentTop="true"/>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="21dp"
+        android:text="Sign Out"
+        tools:ignore="VisualLintButtonSize"
+        android:layout_alignBottom="@id/bottomNavigationView"
+        android:layout_marginBottom="80dp"
+        />
 
-    </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu"
-        />
+        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>

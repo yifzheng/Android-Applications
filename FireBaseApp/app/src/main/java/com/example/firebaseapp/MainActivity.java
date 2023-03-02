@@ -4,15 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,7 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewInterface{
+public class MainActivity extends AppCompatActivity implements RecyclerViewInterface, BottomNavigationView.OnItemSelectedListener{
     private static final String TAG = "MainActivity";
 
     private static final String KEY_TITLE = "title", KEY_DESCRIPTION = "description", KEY_NOTEID = "noteID";
@@ -44,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     private RecyclerView recyclerView;
     private NoteAdapter noteAdapter;
     private ArrayList<Note> noteList;
+    private BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,30 +47,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).hide(); // hides the bar that tells app name
+        // <--------------Bottom Navigation View---------------------->
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
-        Button addNoteButton = (Button) findViewById(R.id.add_note_btn);
-        Button signoutBtn = findViewById(R.id.sign_out_btn);
 
+        // <----------Recycler View------------------------------------>
         recyclerView = findViewById(R.id.note_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         noteList = new ArrayList<>();
         noteAdapter = new NoteAdapter(this, noteList, this);
         recyclerView.setAdapter(noteAdapter);
-
-        addNoteButton.setOnClickListener(new View.OnClickListener() {
-            // go to new activity
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CreateNote.class));
-            }
-        });
-
-        signoutBtn.setOnClickListener(view -> {
-            myAuth.signOut();
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        });
 
         // slide to delete item
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -132,5 +117,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         Intent intent = new Intent(MainActivity.this, NoteDescription.class);
         intent.putExtra(KEY_NOTEID, noteList.get(position).getId());
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.logout:
+                myAuth.signOut();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                return true;
+            case R.id.home:
+                return true;
+            case R.id.addNote:
+                startActivity(new Intent(MainActivity.this, CreateNote.class));
+                return true;
+        }
+        return false;
     }
 }

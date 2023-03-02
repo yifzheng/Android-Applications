@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,9 +31,9 @@
             android:layout_marginTop="30dp"
             android:hint="Description"
             android:inputType="textMultiLine"
+            android:maxHeight="200dp"
             android:minHeight="48dp"
-            android:padding="10dp"
-            android:maxHeight="200dp"/>
+            android:padding="10dp" />
 
 
     </LinearLayout>
@@ -44,14 +45,21 @@
         android:layout_alignBottom="@+id/CANCEL_UPDATE_NOTE_BTN"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="40dp"
-        android:text="@string/update"/>
+        android:text="@string/update" />
 
     <Button
         android:id="@+id/CANCEL_UPDATE_NOTE_BTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/bottomNavigationView"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="30dp"
-        android:text="Cancel"/>
+        android:layout_marginBottom="80dp"
+        android:text="Cancel" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>
