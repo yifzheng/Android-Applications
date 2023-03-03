@@ -70,6 +70,7 @@ public class CreateNote extends AppCompatActivity implements BottomNavigationVie
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 finish(); // go back to main activity
+                bottomNavigationView.setSelectedItemId(R.id.home);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
