@@ -1,16 +1,15 @@
 package com.example.firebaseapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView registerHere;
     Button login;
     private FirebaseAuth myAuth = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,33 +48,30 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void loginUser()
-    {
+    public void loginUser() {
         String email = etLogEmail.getText().toString();
         String password = etLogPassword.getText().toString();
 
-        if (TextUtils.isEmpty(email))
-        {
+        if (TextUtils.isEmpty(email)) {
             etLogEmail.setError("Email cannot be empty");
             etLogEmail.requestFocus();
-        }
-        else if (TextUtils.isEmpty(password))
-        {
+        } else if (TextUtils.isEmpty(password)) {
             etLogPassword.setError("Password cannot be empty");
             etLogPassword.requestFocus();
-        }
-        else
-        {
+        } else {
             myAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful())
-                    {
+                    if (task.isSuccessful()) {
                         FirebaseUser user = myAuth.getCurrentUser();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    }
-                    else
-                    {
+                        if (user.isEmailVerified()) {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        }
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
                         Toast.makeText(LoginActivity.this, "Login Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
