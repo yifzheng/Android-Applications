@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -35,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View v = activityRegisterBinding.getRoot();
         setContentView(v);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         etRegFName = activityRegisterBinding.registerFirstname;
         etRegLName = activityRegisterBinding.registerLastname;

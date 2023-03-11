@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".StartActivity">
+
+    <ImageView
+        android:id="@+id/start_activity_logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/ic_firelogo_foreground" />
+
+    <TextView
+        android:id="@+id/start_activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="330dp"
+        android:fontFamily="serif-monospace"
+        android:text="FireMessage"
+        android:textColor="#DD3535"
+        android:textSize="48sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignTop="@id/start_activity_title"
+        android:layout_marginTop="100dp"
+        android:padding="25dp">
+
+        <Button
+            android:id="@+id/start_activity_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F44336"
+            android:minHeight="60dp"
+            android:text="Login" />
+
+        <Button
+            android:id="@+id/start_activity_register_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F44336"
+            android:minHeight="60dp"
+            android:text="Register" />
+    </LinearLayout>
+</RelativeLayout>
