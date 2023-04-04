@@ -56,13 +56,4 @@ public class LoginActivityInstrumentedTest {
         onView(withId(R.id.register_here)).perform(click());
         intended(hasComponent("com.example.firebaseapp.RegisterActivity"));
     }
-    /*// test if we can successfully login
-    @Test
-    public void loginTest(){
-        onView(withId(R.id.login_email)).perform(typeText("admin@gmail.com"));
-        onView(withId(R.id.login_password)).perform(typeText("password"));
-        onView(withId(R.id.btn_login)).perform(click());
-        // view in new activity
-        onView(withId(R.id.note_list)).check(matches(isDisplayed()));
-    }*/
 }
